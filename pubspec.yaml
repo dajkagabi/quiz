@@ -26,5 +26,9 @@ dev_dependencies:
   very_good_analysis: ^10.2.0
 
 flutter:
+  assets:
+    - assets/data/
+
   generate: true
   uses-material-design: true
+ 

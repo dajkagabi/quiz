@@ -1,0 +1,18 @@
+[
+  {
+    "id": "q1",
+    "question": "Melyik évben alakult az Omega?",
+    "options": ["1958", "1962", "1968", "1972"],
+    "correctIndex": 1,
+    "topic": "omega",
+    "difficulty": "easy"
+  },
+  {
+    "id": "q2",
+    "question": "Honnan származik az EDDA Művek?",
+    "options": ["Debrecen", "Miskolc", "Szeged", "Pécs"],
+    "correctIndex": 1,
+    "topic": "edda",
+    "difficulty": "easy"
+  }
+]
