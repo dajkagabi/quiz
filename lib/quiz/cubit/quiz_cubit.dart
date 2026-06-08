@@ -3,16 +3,19 @@ import 'package:quiz/quiz/cubit/quiz_state.dart';
 import 'package:quiz/quiz/repository/quiz_repository.dart';
 
 // Cubit a quiz állapotának kezelésére
-// A QuizCubit osztály a quiz állapotát kezeli, beleértve akérdések betöltését, a következő kérdésre lépést, a válaszok értékelését és a kvíz újraindítását.
+// A QuizCubit osztály a quiz állapotát kezeli, beleértve akérdések betöltését,
+// a következő kérdésre lépést, a válaszok értékelését és a kvíz újraindítását.
 // A QuizRepository-t használja a kérdések betöltésére.
 
 class QuizCubit extends Cubit<QuizState> {
-  final QuizRepository repository;
+  final QuizRepository _repository;
 
-  QuizCubit(this.repository) : super(QuizState.initial());
+  QuizCubit(QuizRepository repository)
+    : _repository = repository,
+      super(QuizState.initial());
 
   Future<void> loadQuiz() async {
-    final questions = await repository.loadQuestions();
+    final questions = await _repository.loadQuestions();
 
     emit(
       state.copyWith(
@@ -22,34 +25,55 @@ class QuizCubit extends Cubit<QuizState> {
     );
   }
 
-  void nextQuestion() {
-    if (state.currentQuestionIndex < state.questions.length - 1) {
-      emit(
-        state.copyWith(
-          currentQuestionIndex: state.currentQuestionIndex + 1,
-        ),
-      );
-    } else {
-      emit(state.copyWith(isFinished: true));
-    }
+  void answer(bool isCorrect) {
+    emit(
+      state.copyWith(
+        isAnswered: true,
+        wasCorrect: isCorrect,
+        score: isCorrect ? state.score + 1 : state.score,
+      ),
+    );
   }
 
-  void answer(bool isCorrect) {
-    if (isCorrect) {
-      emit(
-        state.copyWith(score: state.score + 1),
-      );
+  /// Vár egy rövid időt, majd megmutatja, hogy a válasz helyes volt-e.
+  /// Ez létrehoz egy kis "feszültséget" a felhasználói élményhez.
+  Future<void> revealAnswerWithDelay(
+    bool isCorrect, {
+    //Gyorsaság
+    int revealMilliseconds = 800,
+  }) async {
+    await Future<void>.delayed(Duration(milliseconds: revealMilliseconds));
+
+    emit(
+      state.copyWith(
+        isAnswered: true,
+        wasCorrect: isCorrect,
+        score: isCorrect ? state.score + 1 : state.score,
+      ),
+    );
+  }
+
+  Future<void> goNextAfterDelay() async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+
+    final nextIndex = state.currentQuestionIndex + 1;
+
+    if (nextIndex >= state.questions.length) {
+      emit(state.copyWith(isFinished: true));
+      return;
     }
+
+    emit(
+      state.copyWith(
+        currentQuestionIndex: nextIndex,
+        isAnswered: false,
+        wasCorrect: null,
+      ),
+    );
   }
 
   void restart() {
-    emit(
-      state.copyWith(
-        questions: state.questions,
-        currentQuestionIndex: 0,
-        score: 0,
-        isFinished: false,
-      ),
-    );
+    emit(QuizState.initial());
+    loadQuiz();
   }
 }

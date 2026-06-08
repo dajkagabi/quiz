@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz/quiz/cubit/quiz_cubit.dart';
 import 'package:quiz/quiz/cubit/quiz_state.dart';
-import 'package:quiz/quiz/models/question.dart';
+import 'package:quiz/quiz/view/result_view.dart';
+
 import 'package:quiz/quiz/repository/quiz_repository.dart';
 
 // A QuizPage a quiz alkalmazás fő oldala, ahol a kérdések megjelennek és a felhasználó válaszolhat rájuk.
@@ -34,16 +35,12 @@ class _QuizView extends StatelessWidget {
           }
 
           if (state.isFinished) {
-            return _ResultView(score: state.score);
+            return ResultView(score: state.score);
           }
 
-          if (state.questions.isEmpty) {
-            return const Center(
-              child: Text('Nincs elérhető kérdés a kvízhez.'),
-            );
-          }
+          final questions = state.questions;
 
-          final Question question = state.questions[state.currentQuestionIndex];
+          final question = questions[state.currentQuestionIndex];
 
           return Padding(
             padding: const EdgeInsets.all(16),
@@ -62,66 +59,91 @@ class _QuizView extends StatelessWidget {
 
                 Text('Pontszám: ${state.score}'),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 20),
 
-                ...question.options.map(
-                  (option) => Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        final optionIndex = question.options.indexOf(option);
+                if (state.isAnswered)
+                  Row(
+                    children: [
+                      Icon(
+                        state.wasCorrect == true
+                            ? Icons.check_circle
+                            : Icons.cancel,
+                        color: state.wasCorrect == true
+                            ? Colors.green
+                            : Colors.red,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        state.wasCorrect == true
+                            ? 'Helyes válasz!'
+                            : 'Hibás válasz!',
+                        style: TextStyle(
+                          color: state.wasCorrect == true
+                              ? Colors.green
+                              : Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
 
-                        final isCorrect = optionIndex == question.correctIndex;
-
-                        context.read<QuizCubit>().answer(isCorrect);
-
-                        context.read<QuizCubit>().nextQuestion();
-                      },
-                      child: Text(option),
+                if (state.isAnswered && state.wasCorrect == false)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12, bottom: 12),
+                    child: Text(
+                      'Helyes válasz: ${question.options[question.correctIndex]}',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
                     ),
                   ),
+
+                const SizedBox(height: 20),
+
+                ...question.options.map(
+                  (option) {
+                    final optionIndex = question.options.indexOf(option);
+
+                    final isCorrect = optionIndex == question.correctIndex;
+
+                    Color? color;
+
+                    if (state.isAnswered) {
+                      if (isCorrect) {
+                        color = Colors.green;
+                      } else {
+                        color = Colors.red;
+                      }
+                    }
+
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: color,
+                        ),
+                        onPressed: state.isAnswered
+                          ? null
+                          : () async {
+                            final cubit = context.read<QuizCubit>();
+
+                            final isCorrect =
+                              optionIndex == question.correctIndex;
+
+                            await cubit.revealAnswerWithDelay(isCorrect);
+                            await cubit.goNextAfterDelay();
+                            },
+                        child: Text(option),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class _ResultView extends StatelessWidget {
-  final int score;
-
-  const _ResultView({required this.score});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Kvíz vége!',
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-          ),
-
-          const SizedBox(height: 16),
-
-          Text(
-            'Pontszám: $score',
-            style: const TextStyle(fontSize: 20),
-          ),
-
-          const SizedBox(height: 24),
-
-          ElevatedButton(
-            onPressed: () {
-              context.read<QuizCubit>().restart();
-            },
-            child: const Text('Újrakezdés'),
-          ),
-        ],
       ),
     );
   }
