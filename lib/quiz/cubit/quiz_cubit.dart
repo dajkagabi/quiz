@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:quiz/quiz/cubit/quiz_state.dart';
 import 'package:quiz/quiz/repository/quiz_repository.dart';
 
-// Cubit a quiz állapotának kezelésére
-// A QuizCubit osztály a quiz állapotát kezeli, beleértve akérdések betöltését,
-// a következő kérdésre lépést, a válaszok értékelését és a kvíz újraindítását.
-// A QuizRepository-t használja a kérdések betöltésére.
+import 'package:bloc/bloc.dart';
+import 'package:quiz/quiz/cubit/quiz_state.dart';
+import 'package:quiz/quiz/repository/quiz_repository.dart';
 
+// Cubit a quiz állapotának kezelésére
 class QuizCubit extends Cubit<QuizState> {
   final QuizRepository _repository;
 
@@ -15,11 +15,14 @@ class QuizCubit extends Cubit<QuizState> {
       super(QuizState.initial());
 
   Future<void> loadQuiz() async {
-    final questions = await _repository.loadQuestions();
+    final rawQuestions = await _repository.loadQuestions();
+
+    // Készítünk egy módosítható másolatot a listából és megkeverjük a sorrendet
+    final shuffledQuestions = List.of(rawQuestions)..shuffle();
 
     emit(
       state.copyWith(
-        questions: questions,
+        questions: shuffledQuestions,
         isLoading: false,
       ),
     );
@@ -37,11 +40,10 @@ class QuizCubit extends Cubit<QuizState> {
   }
 
   /// Vár egy rövid időt, majd megmutatja, hogy a válasz helyes volt-e.
-  /// Ez létrehoz egy kis "feszültséget" a felhasználói élményhez.
+  /// Ez létrehoz egy kis "feszültséget" - késleltetés-  a felhasználói élményhez.
   Future<void> revealAnswerWithDelay(
     bool isCorrect,
     int selectedOptionIndex, {
-    //Gyorsaság
     int revealMilliseconds = 500,
   }) async {
     await Future<void>.delayed(Duration(milliseconds: revealMilliseconds));
@@ -70,7 +72,9 @@ class QuizCubit extends Cubit<QuizState> {
   }
 
   void restart() {
-    emit(QuizState.initial());
+    // Az initial állapotba állás mellett jelezzük, hogy töltünk,
+    // így a UI-on tisztán látszik az átmenet, miközben az újrakevert kérdések betöltődnek.
+    emit(QuizState.initial().copyWith(isLoading: true));
     loadQuiz();
   }
 }
