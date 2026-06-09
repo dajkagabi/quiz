@@ -11,7 +11,6 @@ import 'package:quiz/quiz/repository/quiz_repository.dart';
 // és a QuizRepository-t a kérdések betöltésére.
 // A kérdések megjelenítése és a válaszok értékelése is itt történik.
 // Amikor a kvíz véget ér, egy eredmény nézet jelenik meg a pontszámmal és egy újraindítás gombbal.
-
 class QuizPage extends StatelessWidget {
   const QuizPage({super.key});
 
@@ -27,20 +26,37 @@ class QuizPage extends StatelessWidget {
 class _QuizView extends StatelessWidget {
   const _QuizView();
 
+  /// Színpaletta a kvízhez: sötét háttér, kontrasztos kártyák és élénk színek
+  /// Visszatalálni ide változtatáshoz.
+  static const Color _bgColor = Color(0xFF101217);
+  static const Color _cardColor = Color(0xFF1F2332);
+  static const Color _accentColor = Color(0xFFFFC107);
+  static const Color _contentText = Colors.white;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: _bgColor,
       appBar: AppBar(
-        title: const Text('Magyar Rock Kvíz'),
+        title: const Text(
+          'Magyar Rock Kvíz',
+          style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2),
+        ),
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.white,
+        centerTitle: true,
       ),
       body: BlocBuilder<QuizCubit, QuizState>(
         builder: (context, state) {
           if (state.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(color: _accentColor),
+            );
+          }
+
+          if (state.isWelcomePage) {
+            return _buildWelcomeScreen(context, state.questions.length);
           }
 
           if (state.isFinished) {
@@ -63,7 +79,7 @@ class _QuizView extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
-                        color: Colors.grey.shade600,
+                        color: Colors.grey.shade400,
                       ),
                     ),
                     Text(
@@ -71,17 +87,17 @@ class _QuizView extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: _accentColor,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
                 LinearProgressIndicator(
                   value:
                       (state.currentQuestionIndex + 1) / state.questions.length,
-                  backgroundColor: Colors.grey.shade300,
-                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
+                  backgroundColor: const Color(0xFF171A24),
+                  valueColor: const AlwaysStoppedAnimation<Color>(_accentColor),
                   minHeight: 6,
                   borderRadius: BorderRadius.circular(3),
                 ),
@@ -92,9 +108,10 @@ class _QuizView extends StatelessWidget {
                   duration: const Duration(milliseconds: 300),
                   child: Card(
                     key: ValueKey<String>(question.id),
-                    elevation: 2,
+                    color: _cardColor,
+                    elevation: 4,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(24.0),
@@ -103,6 +120,7 @@ class _QuizView extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -117,37 +135,40 @@ class _QuizView extends StatelessWidget {
                   (optionIndex) {
                     final option = question.options[optionIndex];
 
-                    Color buttonColor = Colors.white;
-                    Color textColor = Colors.black87;
+                    Color buttonColor = _cardColor;
+                    Color textColor = _contentText;
+                    Color borderColor = const Color(0xFF2A2F41);
 
                     if (state.isAnswered) {
                       if (optionIndex == question.correctIndex) {
-                        buttonColor = Colors.green.shade100;
-                        textColor = Colors.green.shade900;
+                        buttonColor = Colors.green.shade900.withOpacity(0.4);
+                        textColor = Colors.green.shade200;
+                        borderColor = Colors.green;
                       } else if (optionIndex == state.selectedOptionIndex) {
-                        buttonColor = Colors.red.shade100;
-                        textColor = Colors.red.shade900;
+                        buttonColor = Colors.red.shade900.withOpacity(0.4);
+                        textColor = Colors.red.shade200;
+                        borderColor = Colors.red;
                       }
                     }
 
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0),
+                      padding: const EdgeInsets.only(bottom: 14.0),
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
                         decoration: BoxDecoration(
                           color: buttonColor,
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color:
-                                state.isAnswered &&
-                                    optionIndex == question.correctIndex
-                                ? Colors.green
-                                : state.isAnswered &&
-                                      optionIndex == state.selectedOptionIndex
-                                ? Colors.red
-                                : Colors.grey.shade300,
+                            color: borderColor,
                             width: state.isAnswered ? 2 : 1,
                           ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
                         ),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(16),
@@ -171,7 +192,9 @@ class _QuizView extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: textColor,
+                                color: state.isAnswered
+                                    ? textColor
+                                    : _contentText,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -182,16 +205,17 @@ class _QuizView extends StatelessWidget {
                   },
                 ),
 
-                //  Edukatív Forrás Kártya (Csak válaszadás után jelenik meg)
-                // JSON fájból adja vissza
+                // Edukatív Forrás Kártya
                 if (state.isAnswered && question.sources != null) ...[
                   const SizedBox(height: 16),
                   Card(
-                    color: Colors.blue.shade50,
+                    color: _accentColor.withOpacity(0.16),
                     elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      side: BorderSide(color: Colors.blue.shade200),
+                      borderRadius: BorderRadius.circular(16),
+                      side: BorderSide(
+                        color: _accentColor.withOpacity(0.35),
+                      ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -202,7 +226,7 @@ class _QuizView extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.library_music,
-                                color: Colors.blue.shade800,
+                                color: _accentColor.withOpacity(0.95),
                                 size: 20,
                               ),
                               const SizedBox(width: 8),
@@ -211,15 +235,12 @@ class _QuizView extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.blue.shade900,
+                                  color: _accentColor.withOpacity(0.95),
                                 ),
                               ),
                             ],
                           ),
-                          const Divider(
-                            color: Color(0xFFBBDEFB),
-                          ), // Finom elválasztó vonal
-                          // Hungaroton információk
+                          const Divider(color: Colors.white24),
                           if (question.sources?.hungaroton != null) ...[
                             Text(
                               question.sources!.hungaroton!.catalogType ==
@@ -229,23 +250,29 @@ class _QuizView extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
+                                color: Colors.white,
                               ),
                             ),
+                            const SizedBox(height: 4),
                             if (question.sources!.hungaroton!.catalogType !=
                                 'recording_context')
                               Text(
                                 '• Kiadó: Hungaroton ${question.sources!.hungaroton!.label} (${question.sources!.hungaroton!.year})',
-                                style: const TextStyle(fontSize: 14),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey.shade400,
+                                ),
                               ),
                             if (question.sources!.hungaroton!.catalogType ==
                                 'recording_context')
                               Text(
                                 '• Megjelent: A "${question.sources!.hungaroton!.title}" című lemezen (${question.sources!.hungaroton!.year})',
-                                style: const TextStyle(fontSize: 14),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey.shade400,
+                                ),
                               ),
                           ],
-
-                          // Artisjus / ISWC kód információk
                           if (question.sources?.artisjus != null) ...[
                             const SizedBox(height: 6),
                             Text(
@@ -253,13 +280,15 @@ class _QuizView extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
+                                color: Colors.white,
                               ),
                             ),
+                            const SizedBox(height: 2),
                             Text(
                               '• Hivatalos ISWC kód: ${question.sources!.artisjus!.iswc}',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colors.grey.shade700,
+                                color: Colors.grey.shade500,
                                 fontStyle: FontStyle.italic,
                               ),
                             ),
@@ -270,22 +299,26 @@ class _QuizView extends StatelessWidget {
                   ),
                 ],
 
-                // Következő kérdés gomb (Csak válaszadás után)
+                // Manuális "Következő kérdés" gomb
                 if (state.isAnswered) ...[
                   const SizedBox(height: 24),
                   ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
+                      backgroundColor: _accentColor,
+                      foregroundColor: Colors.black,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
+                      elevation: 4,
                     ),
                     onPressed: () {
                       context.read<QuizCubit>().goNextAfterDelay();
                     },
-                    icon: const Icon(Icons.arrow_forward),
+                    icon: const Icon(
+                      Icons.arrow_forward,
+                      // fontWeight not valid for Icon; using default.
+                    ),
                     label: Text(
                       state.currentQuestionIndex + 1 >= state.questions.length
                           ? 'Eredmények megtekintése'
@@ -301,6 +334,139 @@ class _QuizView extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  // 🔥 KIMAGASLÓAN SZEBB ÉS MODERNEBB KEZDŐLAP (WELCOME SCREEN)
+  Widget _buildWelcomeScreen(BuildContext context, int questionCount) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Spacer(),
+          // Nagyméretű dizájnos Rock ikon kör alakú háttérrel és parázs/arany effektussal
+          Container(
+            padding: const EdgeInsets.all(28),
+            decoration: BoxDecoration(
+              color: _accentColor.withOpacity(0.12),
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: _accentColor.withOpacity(0.3),
+                width: 2,
+              ),
+            ),
+            child: const Icon(
+              Icons.bolt, // Villám / Rock ikon
+              size: 80,
+              color: _accentColor,
+            ),
+          ),
+          const SizedBox(height: 40),
+
+          // Főcím stílusos betűközzel és vastagsággal
+          const Text(
+            'Magyar Rock Kvíz',
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.w900,
+              color: Colors.white,
+              letterSpacing: 1.5,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+
+          // Alcím / Leírás
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Teszteld a tudásod a hazai rocktörténelem legnagyobb slágereiről, albumairól és legendáiról!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.grey.shade400,
+                height: 1.5,
+              ),
+            ),
+          ),
+          const SizedBox(height: 32),
+
+          // Kis modern "Badge" a kérdések számának kiemelésére
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1E1E24),
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(color: Colors.white10),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.help_outline, color: _accentColor, size: 18),
+                const SizedBox(width: 8),
+                Text(
+                  '$questionCount kérdés vár rád',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const Spacer(),
+
+          // Prémium kinézetű indítógomb
+          Container(
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              boxShadow: [
+                BoxShadow(
+                  color: _accentColor.withOpacity(0.3),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: _accentColor,
+                foregroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                elevation: 0,
+              ),
+              onPressed: () {
+                context.read<QuizCubit>().startQuiz();
+              },
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Kvíz Indítása',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Icon(Icons.play_arrow_rounded, size: 24),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
       ),
     );
   }

@@ -10,10 +10,10 @@ class QuizState {
   final int score;
   final bool isLoading;
   final bool isFinished;
-
   final bool isAnswered;
   final bool? wasCorrect;
   final int? selectedOptionIndex;
+  final bool isWelcomePage;
 
   const QuizState({
     required this.questions,
@@ -24,6 +24,7 @@ class QuizState {
     required this.isAnswered,
     required this.wasCorrect,
     required this.selectedOptionIndex,
+    required this.isWelcomePage,
   });
 
   factory QuizState.initial() {
@@ -36,6 +37,7 @@ class QuizState {
       isAnswered: false,
       wasCorrect: null,
       selectedOptionIndex: null,
+      isWelcomePage: true,
     );
   }
 
@@ -48,9 +50,8 @@ class QuizState {
     bool? isAnswered,
     bool? wasCorrect,
     int? selectedOptionIndex,
+    bool? isWelcomePage,
   }) {
-    // Ez a copyWith metódus lehetővé teszi az állapot részleges frissítését anélkül,
-    // hogy minden mezőt meg kellene adni.
     return QuizState(
       questions: questions ?? this.questions,
       currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,
@@ -60,6 +61,7 @@ class QuizState {
       isAnswered: isAnswered ?? this.isAnswered,
       wasCorrect: wasCorrect ?? this.wasCorrect,
       selectedOptionIndex: selectedOptionIndex ?? this.selectedOptionIndex,
+      isWelcomePage: isWelcomePage ?? this.isWelcomePage,
     );
   }
 }

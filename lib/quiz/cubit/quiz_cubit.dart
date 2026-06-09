@@ -12,8 +12,6 @@ class QuizCubit extends Cubit<QuizState> {
 
   Future<void> loadQuiz() async {
     final rawQuestions = await _repository.loadQuestions();
-
-    // Készítünk egy módosítható másolatot a listából és megkeverjük a sorrendet
     final shuffledQuestions = List.of(rawQuestions)..shuffle();
 
     emit(
@@ -22,6 +20,11 @@ class QuizCubit extends Cubit<QuizState> {
         isLoading: false,
       ),
     );
+  }
+
+  // Kezdőképernyő,
+  void startQuiz() {
+    emit(state.copyWith(isWelcomePage: false));
   }
 
   void answer(bool isCorrect, int selectedOptionIndex) {
@@ -35,21 +38,20 @@ class QuizCubit extends Cubit<QuizState> {
     );
   }
 
-  /// Vár egy rövid időt, majd megmutatja, hogy a válasz helyes volt-e.
-  /// Ez létrehoz egy kis "feszültséget" - késleltetés-  a felhasználói élményhez.
+  // Vár egy rövid időt, majd megmutatja, hogy a válasz helyes volt-e.
+  // Ez létrehoz egy késleltetés  a felhasználói élményhez.
   Future<void> revealAnswerWithDelay(
     bool isCorrect,
     int selectedOptionIndex, {
     int revealMilliseconds = 500,
   }) async {
     await Future<void>.delayed(Duration(milliseconds: revealMilliseconds));
-
     answer(isCorrect, selectedOptionIndex);
   }
 
+  // Vár egy rövid időt, majd megmutatja a következő kérdést, vagy ha már nincs több kérdés, akkor véget ér a játék.
   Future<void> goNextAfterDelay() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-
     final nextIndex = state.currentQuestionIndex + 1;
 
     if (nextIndex >= state.questions.length) {
@@ -68,9 +70,8 @@ class QuizCubit extends Cubit<QuizState> {
   }
 
   void restart() {
-    // Az initial állapotba állás mellett jelezzük, hogy töltünk,
-    // így a UI-on tisztán látszik az átmenet, miközben az újrakevert kérdések betöltődnek.
-    emit(QuizState.initial().copyWith(isLoading: true));
+    // Újraindításkor visszajövünk a kezdőlapra, hogy újra lehessen indítani
+    emit(QuizState.initial().copyWith(isLoading: true, isWelcomePage: true));
     loadQuiz();
   }
 }
