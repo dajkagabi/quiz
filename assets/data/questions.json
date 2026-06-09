@@ -5,14 +5,118 @@
     "options": ["1958", "1962", "1968", "1972"],
     "correctIndex": 1,
     "topic": "omega",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "Artisjus Zeneműkiadó / Omega életmű-regisztráció",
+      "hungaroton_album": "Trombitás Frédi és a rettenetes emberek (LP, 1968) - Hungaroton Pepita"
+    }
   },
   {
     "id": "q2",
     "question": "Honnan származik az EDDA Művek?",
-    "options": ["Debrecen", "Miskolc", "Szeged", "Pécs"],
+    "options": ["Debrecen", "Miskolc", "Szeged", "Győr"],
     "correctIndex": 1,
     "topic": "edda",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "Miskolci EDDA Művek hivatalos életmű-adatbázis",
+      "hungaroton_album": "Edda Művek 1. (LP, 1980) - Hungaroton Start"
+    }
+  },
+  {
+    "id": "q3",
+    "question": "Melyik zenekarhoz köthető a 'Ha én rózsa volnék' című dal?",
+    "options": ["Illés", "Locomotiv GT", "Omega", "Neoton Família"],
+    "correctIndex": 0,
+    "topic": "illes",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "ISWC T-007.003.829-9 (Szerző: Bródy János)",
+      "hungaroton_album": "Koncz Zsuzsa – Jelbeszéd (LP, 1973) / Illés-verziók - Hungaroton Pepita"
+    }
+  },
+  {
+    "id": "q4",
+    "question": "Melyik zenekar adta ki a 'Miénk itt a tér' című dalt?",
+    "options": ["Locomotiv GT", "Beatrice", "P. Mobil", "Skorpió"],
+    "correctIndex": 0,
+    "topic": "lgt",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "ISWC T-007.004.832-8 (Szerzők: Presser Gábor - Adamis Anna)",
+      "hungaroton_album": "Bummm! (LP, 1973) - Hungaroton Pepita"
+    }
+  },
+  {
+    "id": "q5",
+    "question": "Ki volt az EDDA Művek legismertebb énekese?",
+    "options": ["Pataky Attila", "Deák Bill Gyula", "Kovács Ákos", "Balázs Fecó"],
+    "correctIndex": 0,
+    "topic": "edda",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "Artisjus előadói regisztráció (Pataky Attila)",
+      "hungaroton_album": "Edda Művek 2. (LP, 1981) - Hungaroton Start"
+    }
+  },
+  {
+    "id": "q6",
+    "question": "Milyen zenei stílushoz köthető a P. Mobil?",
+    "options": ["Hard rock", "Diszkó", "Pop", "Jazz"],
+    "correctIndex": 0,
+    "topic": "p_mobil",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "Artisjus műnyilvántartás (Schuster Lóránt életmű)",
+      "hungaroton_album": "Mobilizmo (LP, 1981) - Hungaroton Start"
+    }
+  },
+  {
+    "id": "q7",
+    "question": "Melyik zenekarhoz köthető a 'Gyere kislány' című dal?",
+    "options": ["Karthago", "Ossian", "Neoton Família", "Beatrice"],
+    "correctIndex": 3,
+    "topic": "beatrice",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "ISWC T-007.126.974-9 (Szerző: Nagy Feró / Beatrice)",
+      "hungaroton_album": "Gyermekkorunk lexikona (LP, 1988) / Betiltott dalok (1979-es felvételek) - Hungaroton"
+    }
+  },
+  {
+    "id": "q8",
+    "question": "Ki volt a Hobo Blues Band frontembere?",
+    "options": ["Földes László (Hobo)", "Pataky Attila", "Paksi Endre", "Bródy János"],
+    "correctIndex": 0,
+    "topic": "hobo_blues_band",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "Artisjus műnyilvántartás (Földes László életmű)",
+      "hungaroton_album": "Középeurópai Hobo Blues (2LP, 1980) - Hungaroton Pepita"
+    }
+  },
+  {
+    "id": "q9",
+    "question": "Ki alapította az Ossian zenekart?",
+    "options": ["Paksi Endre", "Pataky Attila", "Kóbor János", "Benkő László"],
+    "correctIndex": 0,
+    "topic": "ossian",
+    "difficulty": "medium",
+    "sources": {
+      "artisjus_iswc": "Artisjus műnyilvántartás (Paksi Endre és Maróthy Zoltán)",
+      "hungaroton_album": "Acélszív (LP, 1988) - Hungaroton Start"
+    }
+  },
+  {
+    "id": "q10",
+    "question": "Melyik zenekarhoz köthető a '67-es út' című dal?",
+    "options": ["Republic", "Omega", "Illés", "Locomotiv GT"],
+    "correctIndex": 0,
+    "topic": "republic",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "ISWC T-007.128.534-1 (Szerző: Bódi László - Cipő)",
+      "hungaroton_album": "Disco (LP/CD, 1993) - Hungaroton Quint"
+    }
   }
 ]

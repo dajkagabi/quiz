@@ -46,33 +46,72 @@ class _QuizView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, animation) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(0.2, 0),
-                          end: Offset.zero,
-                        ).animate(animation),
-                        child: child,
-                      ),
-                    );
-                  },
-                  child: Text(
-                    question.question,
-                    key: ValueKey(question.id),
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          transitionBuilder: (child, animation) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: SlideTransition(
+                                position: Tween<Offset>(
+                                  begin: const Offset(0.2, 0),
+                                  end: Offset.zero,
+                                ).animate(animation),
+                                child: child,
+                              ),
+                            );
+                          },
+                          child: Text(
+                            question.question,
+                            key: ValueKey(question.id),
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Pontszám: ${state.score}',
+                              style: Theme.of(context).textTheme.bodyLarge
+                                  ?.copyWith(fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              '${state.currentQuestionIndex + 1}/${questions.length}',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 12),
+
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: LinearProgressIndicator(
+                            value:
+                                (state.currentQuestionIndex + 1) /
+                                questions.length,
+                            minHeight: 8,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-
-                const SizedBox(height: 8),
-
-                Text('Pontszám: ${state.score}'),
 
                 const SizedBox(height: 20),
 
@@ -117,21 +156,27 @@ class _QuizView extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                ...question.options.map(
-                  (option) {
-                    final optionIndex = question.options.indexOf(option);
-
+                ...question.options.asMap().entries.map(
+                  (entry) {
+                    final optionIndex = entry.key;
+                    final option = entry.value;
                     final isCorrect = optionIndex == question.correctIndex;
-
-                    Color? color;
-
-                    if (state.isAnswered) {
-                      if (isCorrect) {
-                        color = Colors.green;
-                      } else {
-                        color = Colors.red;
-                      }
-                    }
+                    final theme = Theme.of(context);
+                    final buttonBorderColor = state.isAnswered
+                        ? isCorrect
+                              ? Colors.green
+                              : Colors.red
+                        : theme.colorScheme.primary;
+                    final buttonBackground = state.isAnswered
+                        ? isCorrect
+                              ? Colors.green.shade50
+                              : Colors.red.shade50
+                        : Colors.transparent;
+                    final buttonTextColor = state.isAnswered
+                        ? isCorrect
+                              ? Colors.green.shade900
+                              : Colors.red.shade900
+                        : theme.colorScheme.onSurface;
 
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
@@ -139,21 +184,26 @@ class _QuizView extends StatelessWidget {
                         duration: const Duration(milliseconds: 250),
                         curve: Curves.easeInOut,
                         decoration: BoxDecoration(
-                          color: color,
+                          color: buttonBackground,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: color ?? Colors.transparent,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              foregroundColor: buttonTextColor,
                               shadowColor: Colors.transparent,
                               side: BorderSide(
-                                color: color ?? Theme.of(context).colorScheme.primary,
+                                color: buttonBorderColor,
                                 width: 2,
                               ),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 16,
+                                horizontal: 16,
                               ),
                             ),
                             onPressed: state.isAnswered
@@ -161,15 +211,18 @@ class _QuizView extends StatelessWidget {
                                 : () async {
                                     final cubit = context.read<QuizCubit>();
 
-                                    final isCorrect =
-                                        optionIndex == question.correctIndex;
-
                                     await cubit.revealAnswerWithDelay(
-                                      isCorrect,
+                                      optionIndex == question.correctIndex,
                                     );
                                     await cubit.goNextAfterDelay();
                                   },
-                            child: Text(option),
+                            child: Text(
+                              option,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
                         ),
                       ),

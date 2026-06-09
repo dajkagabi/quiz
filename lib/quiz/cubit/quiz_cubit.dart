@@ -44,13 +44,7 @@ class QuizCubit extends Cubit<QuizState> {
   }) async {
     await Future<void>.delayed(Duration(milliseconds: revealMilliseconds));
 
-    emit(
-      state.copyWith(
-        isAnswered: true,
-        wasCorrect: isCorrect,
-        score: isCorrect ? state.score + 1 : state.score,
-      ),
-    );
+    answer(isCorrect);
   }
 
   Future<void> goNextAfterDelay() async {
