@@ -2,10 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:quiz/quiz/cubit/quiz_state.dart';
 import 'package:quiz/quiz/repository/quiz_repository.dart';
 
-import 'package:bloc/bloc.dart';
-import 'package:quiz/quiz/cubit/quiz_state.dart';
-import 'package:quiz/quiz/repository/quiz_repository.dart';
-
 // Cubit a quiz állapotának kezelésére
 class QuizCubit extends Cubit<QuizState> {
   final QuizRepository _repository;
