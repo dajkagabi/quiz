@@ -40,7 +40,7 @@ class QuizCubit extends Cubit<QuizState> {
   Future<void> revealAnswerWithDelay(
     bool isCorrect, {
     //Gyorsaság
-    int revealMilliseconds = 800,
+    int revealMilliseconds = 500,
   }) async {
     await Future<void>.delayed(Duration(milliseconds: revealMilliseconds));
 

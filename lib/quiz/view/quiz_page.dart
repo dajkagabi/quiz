@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz/quiz/cubit/quiz_cubit.dart';
 import 'package:quiz/quiz/cubit/quiz_state.dart';
 import 'package:quiz/quiz/view/result_view.dart';
-
 import 'package:quiz/quiz/repository/quiz_repository.dart';
 
 // A QuizPage a quiz alkalmazás fő oldala, ahol a kérdések megjelennek és a felhasználó válaszolhat rájuk.
@@ -47,11 +46,27 @@ class _QuizView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  question.question,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(0.2, 0),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: Text(
+                    question.question,
+                    key: ValueKey(question.id),
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
 
@@ -120,22 +135,43 @@ class _QuizView extends StatelessWidget {
 
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: color,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.easeInOut,
+                        decoration: BoxDecoration(
+                          color: color,
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        onPressed: state.isAnswered
-                          ? null
-                          : () async {
-                            final cubit = context.read<QuizCubit>();
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: color ?? Colors.transparent,
+                              shadowColor: Colors.transparent,
+                              side: BorderSide(
+                                color: color ?? Theme.of(context).colorScheme.primary,
+                                width: 2,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            onPressed: state.isAnswered
+                                ? null
+                                : () async {
+                                    final cubit = context.read<QuizCubit>();
 
-                            final isCorrect =
-                              optionIndex == question.correctIndex;
+                                    final isCorrect =
+                                        optionIndex == question.correctIndex;
 
-                            await cubit.revealAnswerWithDelay(isCorrect);
-                            await cubit.goNextAfterDelay();
-                            },
-                        child: Text(option),
+                                    await cubit.revealAnswerWithDelay(
+                                      isCorrect,
+                                    );
+                                    await cubit.goNextAfterDelay();
+                                  },
+                            child: Text(option),
+                          ),
+                        ),
                       ),
                     );
                   },
