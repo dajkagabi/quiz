@@ -13,6 +13,7 @@ class QuizState {
 
   final bool isAnswered;
   final bool? wasCorrect;
+  final int? selectedOptionIndex;
 
   const QuizState({
     required this.questions,
@@ -22,6 +23,7 @@ class QuizState {
     required this.isFinished,
     required this.isAnswered,
     required this.wasCorrect,
+    required this.selectedOptionIndex,
   });
 
   factory QuizState.initial() {
@@ -33,6 +35,7 @@ class QuizState {
       isFinished: false,
       isAnswered: false,
       wasCorrect: null,
+      selectedOptionIndex: null,
     );
   }
 
@@ -44,6 +47,7 @@ class QuizState {
     bool? isFinished,
     bool? isAnswered,
     bool? wasCorrect,
+    int? selectedOptionIndex,
   }) {
     // Ez a copyWith metódus lehetővé teszi az állapot részleges frissítését anélkül,
     // hogy minden mezőt meg kellene adni.
@@ -55,6 +59,7 @@ class QuizState {
       isFinished: isFinished ?? this.isFinished,
       isAnswered: isAnswered ?? this.isAnswered,
       wasCorrect: wasCorrect ?? this.wasCorrect,
+      selectedOptionIndex: selectedOptionIndex ?? this.selectedOptionIndex,
     );
   }
 }

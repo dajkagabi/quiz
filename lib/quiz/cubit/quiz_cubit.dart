@@ -25,12 +25,13 @@ class QuizCubit extends Cubit<QuizState> {
     );
   }
 
-  void answer(bool isCorrect) {
+  void answer(bool isCorrect, int selectedOptionIndex) {
     emit(
       state.copyWith(
         isAnswered: true,
         wasCorrect: isCorrect,
         score: isCorrect ? state.score + 1 : state.score,
+        selectedOptionIndex: selectedOptionIndex,
       ),
     );
   }
@@ -38,13 +39,14 @@ class QuizCubit extends Cubit<QuizState> {
   /// Vár egy rövid időt, majd megmutatja, hogy a válasz helyes volt-e.
   /// Ez létrehoz egy kis "feszültséget" a felhasználói élményhez.
   Future<void> revealAnswerWithDelay(
-    bool isCorrect, {
+    bool isCorrect,
+    int selectedOptionIndex, {
     //Gyorsaság
     int revealMilliseconds = 500,
   }) async {
     await Future<void>.delayed(Duration(milliseconds: revealMilliseconds));
 
-    answer(isCorrect);
+    answer(isCorrect, selectedOptionIndex);
   }
 
   Future<void> goNextAfterDelay() async {
@@ -62,6 +64,7 @@ class QuizCubit extends Cubit<QuizState> {
         currentQuestionIndex: nextIndex,
         isAnswered: false,
         wasCorrect: null,
+        selectedOptionIndex: null,
       ),
     );
   }

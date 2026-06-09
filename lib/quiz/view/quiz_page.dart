@@ -26,7 +26,13 @@ class _QuizView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Magyar Rock Kvíz')),
+      backgroundColor: Colors.grey.shade100,
+      appBar: AppBar(
+        title: const Text('Magyar Rock Kvíz'),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+      ),
       body: BlocBuilder<QuizCubit, QuizState>(
         builder: (context, state) {
           if (state.isLoading) {
@@ -161,21 +167,29 @@ class _QuizView extends StatelessWidget {
                     final optionIndex = entry.key;
                     final option = entry.value;
                     final isCorrect = optionIndex == question.correctIndex;
+                    final isSelectedOption =
+                        state.selectedOptionIndex == optionIndex;
                     final theme = Theme.of(context);
                     final buttonBorderColor = state.isAnswered
                         ? isCorrect
                               ? Colors.green
-                              : Colors.red
+                              : isSelectedOption
+                              ? Colors.red
+                              : Colors.grey.shade300
                         : theme.colorScheme.primary;
                     final buttonBackground = state.isAnswered
                         ? isCorrect
                               ? Colors.green.shade50
-                              : Colors.red.shade50
+                              : isSelectedOption
+                              ? Colors.red.shade50
+                              : Colors.transparent
                         : Colors.transparent;
                     final buttonTextColor = state.isAnswered
                         ? isCorrect
                               ? Colors.green.shade900
-                              : Colors.red.shade900
+                              : isSelectedOption
+                              ? Colors.red.shade900
+                              : theme.colorScheme.onSurface
                         : theme.colorScheme.onSurface;
 
                     return Padding(
@@ -185,25 +199,28 @@ class _QuizView extends StatelessWidget {
                         curve: Curves.easeInOut,
                         decoration: BoxDecoration(
                           color: buttonBackground,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: buttonBorderColor,
+                            width: 1.8,
+                          ),
                         ),
                         child: SizedBox(
                           width: double.infinity,
-                          child: OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
                               foregroundColor: buttonTextColor,
-                              shadowColor: Colors.transparent,
-                              side: BorderSide(
-                                color: buttonBorderColor,
-                                width: 2,
-                              ),
+                              backgroundColor: Colors.transparent,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(16),
                               ),
                               padding: const EdgeInsets.symmetric(
-                                vertical: 16,
+                                vertical: 18,
                                 horizontal: 16,
+                              ),
+                              textStyle: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             onPressed: state.isAnswered
@@ -213,16 +230,11 @@ class _QuizView extends StatelessWidget {
 
                                     await cubit.revealAnswerWithDelay(
                                       optionIndex == question.correctIndex,
+                                      optionIndex,
                                     );
                                     await cubit.goNextAfterDelay();
                                   },
-                            child: Text(
-                              option,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                            child: Text(option),
                           ),
                         ),
                       ),
