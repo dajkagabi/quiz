@@ -37,25 +37,25 @@ class ResultView extends StatelessWidget {
     Color rankColor;
 
     if (percentage >= 90) {
-      rankTitle = 'Rocklegenda! 🎸';
+      rankTitle = 'Rocklegenda! ';
       rankDescription =
-          'Zseniális! Nagy Feró, Presser Gábor és Cipő is büszke lenne rád. Mindent tudsz a magyar rockról!';
+          'Zseniális! Balázs Fecó, Presser Gábor és Cipő is büszke lenne rád. Mindent tudsz a magyar rockról!';
       rankIcon = Icons.bolt;
       rankColor = Colors.amber.shade800;
     } else if (percentage >= 65) {
-      rankTitle = 'Koncertbérletes 🎟️';
+      rankTitle = 'Koncertbérletes ';
       rankDescription =
           'Szép teljesítmény! Rendszeresen jársz koncertekre és jól ismered a klasszikus slágereket.';
       rankIcon = Icons.library_music;
       rankColor = Colors.blue.shade700;
     } else if (percentage >= 40) {
-      rankTitle = 'Hobby Gitáros 🎵';
+      rankTitle = 'Hobby Gitáros ';
       rankDescription =
           'Nem rossz, de érdemes még pörgetni a régi Hungaroton bakeliteket a teljes tudáshoz!';
       rankIcon = Icons.music_note;
       rankColor = Colors.orange.shade700;
     } else {
-      rankTitle = 'Kezdő Rocker 🎛️';
+      rankTitle = 'Kezdő Rocker ';
       rankDescription =
           'Ez most egy kicsit mellément, mint egy hamis gitárszóló. Ne add fel, próbáld újra és tanulj a forrásokból!';
       rankIcon = Icons.sentiment_dissatisfied;
