@@ -48,18 +48,6 @@
     }
   },
   {
-    "id": "q5",
-    "question": "Ki volt az EDDA Művek legismertebb énekese?",
-    "options": ["Pataky Attila", "Deák Bill Gyula", "Kovács Ákos", "Balázs Fecó"],
-    "correctIndex": 0,
-    "topic": "edda",
-    "difficulty": "easy",
-    "sources": {
-      "artisjus_iswc": "Artisjus előadói regisztráció (Pataky Attila)",
-      "hungaroton_album": "Edda Művek 2. (LP, 1981) - Hungaroton Start"
-    }
-  },
-  {
     "id": "q6",
     "question": "Milyen zenei stílushoz köthető a P. Mobil?",
     "options": ["Hard rock", "Diszkó", "Pop", "Jazz"],
@@ -117,6 +105,90 @@
     "sources": {
       "artisjus_iswc": "ISWC T-007.128.534-1 (Szerző: Bódi László - Cipő)",
       "hungaroton_album": "Disco (LP/CD, 1993) - Hungaroton Quint"
+    }
+  },
+  {
+    "id": "q11",
+    "question": "Melyik tragikus ihletésű sláger köthető a Karthago zenekarhoz?",
+    "options": ["Apáink útján", "Requiem", "Az ezredforduló", "Keleti éj"],
+    "correctIndex": 1,
+    "topic": "karthago",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "ISWC T-007.004.140-5 (Szerzők: Szigeti Ferenc - Takáts Tamás)",
+      "hungaroton_album": "Karthago (LP, 1981) - Hungaroton Start"
+    }
+  },
+  {
+    "id": "q12",
+    "question": "Melyik kultikus daláról ismert leginkább a Piramis zenekar?",
+    "options": ["Szállj fel magasra", "A becsület", "Kóbor angyal", "Ajándék"],
+    "correctIndex": 1,
+    "topic": "piramis",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "ISWC T-007.006.185-0 (Szerzők: Som Lajos - Köves Miklós - Horváth Attila)",
+      "hungaroton_album": "Piramis I. (LP, 1977) - Hungaroton Pepita"
+    }
+  },
+  {
+    "id": "q13",
+    "question": "Ki alapította a Skorpió zenekart a Lokomotiv GT-ből való távozása után?",
+    "options": ["Frenreisz Károly", "Szűcs Antal Gábor", "Papp Gyula", "Fekete Gábor"],
+    "correctIndex": 0,
+    "topic": "skorpio",
+    "difficulty": "medium",
+    "sources": {
+      "artisjus_iswc": "Artisjus műnyilvántartás (Frenreisz Károly életmű)",
+      "hungaroton_album": "A rohanás (LP, 1974) - Hungaroton Pepita"
+    }
+  },
+  {
+    "id": "q14",
+    "question": "Ki volt a Balázs Fecó által vezetett Korál együttes állandó szövegírója?",
+    "options": ["Horváth Attila", "Bródy János", "Sztevanovity Dusán", "Adamis Anna"],
+    "correctIndex": 0,
+    "topic": "koral",
+    "difficulty": "medium",
+    "sources": {
+      "artisjus_iswc": "Artisjus / Korál életmű-regisztráció (Horváth Attila)",
+      "hungaroton_album": "Korál I. (LP, 1980) - Hungaroton Start"
+    }
+  },
+  {
+    "id": "q15",
+    "question": "Melyik dallal nyert a Neoton Família nagydíjat a japán Yamaha Fesztiválon?",
+    "options": ["Santa Maria", "Marathon", "Don Quijote", "Kétszázhúsz felett"],
+    "correctIndex": 1,
+    "topic": "neoton_familia",
+    "difficulty": "medium",
+    "sources": {
+      "artisjus_iswc": "ISWC T-007.005.158-3 (Szerzők: Pásztor László - Jakab György - Hatvani Emese)",
+      "hungaroton_album": "Marathon (LP, 1980) - Hungaroton Pepita"
+    }
+  },
+  {
+    "id": "q16",
+    "question": "Melyik album volt a Bikini zenekar első nagylemeze D. Nagy Lajos énekessel?",
+    "options": ["Hova lett...", "XX. századi híradó", "Ezt nem tudom másképp mondani", "Mondd el"],
+    "correctIndex": 2,
+    "topic": "bikini",
+    "difficulty": "medium",
+    "sources": {
+      "artisjus_iswc": "Artisjus / Bikini életmű-adatbázis (Nagy Feró távozása utáni korszak)",
+      "hungaroton_album": "Ezt nem tudom másképp mondani (LP, 1985) - Hungaroton Start"
+    }
+  },
+  {
+    "id": "q17",
+    "question": "Melyik sláger köthető a Demjén Ferenc vezette V'Moto-Rock zenekarhoz?",
+    "options": ["Várj, míg felkel majd a nap", "Gyertyák", "Jégszív", "Angyalbőrben"],
+    "correctIndex": 2,
+    "topic": "vmoto_rock",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus_iswc": "ISWC T-007.003.541-6 (Szerzők: Demjén Ferenc - Lerch István)",
+      "hungaroton_album": "V'Moto-Rock II. (LP, 1980) - Hungaroton Pepita"
     }
   }
 ]
