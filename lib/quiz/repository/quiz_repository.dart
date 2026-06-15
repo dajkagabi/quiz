@@ -12,6 +12,7 @@ class QuizRepository {
 
     final jsonList = jsonDecode(jsonString) as List<dynamic>;
 
+    // A JSON-ból betöltött adatokból Question objektumokat hozunk létre
     return jsonList
         .map((e) => Question.fromJson(e as Map<String, dynamic>))
         .toList();

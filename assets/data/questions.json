@@ -375,5 +375,119 @@
         "label": "Pepita"
       }
     }
+  },
+  {
+    "id": "q18",
+    "question": "Melyik progresszív rockzenekarhoz köthető az 1972-es 'Magányos utazás' című ritka kislemez?",
+    "options": [
+      "Syrius",
+      "V73",
+      "Tejút",
+      "Mini"
+    ],
+    "correctIndex": 0,
+    "topic": "syrius",
+    "difficulty": "extreme",
+    "sources": {
+      "artisjus": null,
+      "hungaroton": {
+        "catalog_type": "album",
+        "title": "Devil's Masquerade",
+        "year": 1972,
+        "label": "Pepita"
+      }
+    }
+  },
+  {
+    "id": "q19",
+    "question": "Melyik blues-rock formáció készített közös albumot Deák Bill Gyulával 'Rossz vér' címmel?",
+    "options": [
+      "Török Ádám és a Mini",
+      "Bill és a Box Company",
+      "P. Box",
+      "Kormorán"
+    ],
+    "correctIndex": 1,
+    "topic": "bill_box_company",
+    "difficulty": "extreme",
+    "sources": {
+      "artisjus": null,
+      "hungaroton": {
+        "catalog_type": "album",
+        "title": "Rossz vér",
+        "year": 1983,
+        "label": "Start"
+      }
+    }
+  },
+  {
+    "id": "q20",
+    "question": "Ki volt az Omen zenekar énekese az 1997-es 'Idegen anyag' című nagylemezen?",
+    "options": [
+      "Kalapács József",
+      "Koroknai Árpád",
+      "Rudán Joe",
+      "Molnár 'Stula' Péter"
+    ],
+    "correctIndex": 0,
+    "topic": "omen",
+    "difficulty": "medium",
+    "sources": {
+      "artisjus": null,
+      "hungaroton": {
+        "catalog_type": "album",
+        "title": "Idegen anyag",
+        "year": 1997,
+        "label": "Hungaroton"
+      }
+    }
+  },
+  {
+    "id": "q21",
+    "question": "Melyik világhírű klasszikus zenei mű rock-átiratáról volt rendkívül ismert az Emerson, Lake & Palmer stílusát követő V'73 zenekar?",
+    "options": [
+      "Vivaldi: A négy évszak",
+      "Csajkovszkij: Diótörő",
+      "Muszorgszkij: Egy kiállítás képei",
+      "Beethoven: IX. szimfónia"
+    ],
+    "correctIndex": 2,
+    "topic": "v73",
+    "difficulty": "extreme",
+    "sources": {
+      "artisjus": null,
+      "hungaroton": {
+        "catalog_type": "recording_context",
+        "primary_performer": "V'73 (Forrás: Magyar Narancs / Beatkorszak)",
+        "title": "Egy kiállítás képei (Muszorgszkij-feldolgozás, 1976)",
+        "year": 1976,
+        "label": "Magyar Rádió / Élő felvétel"
+      }
+    }
+  },
+  {
+    "id": "q22",
+    "question": "Melyik heavy metal zenekar debütált a korszakalkotó 'Totális metál' albummal 1986-ban?",
+    "options": [
+      "Ossian",
+      "Pokolgép",
+      "Moby Dick",
+      "Akela"
+    ],
+    "correctIndex": 1,
+    "topic": "pokolgep",
+    "difficulty": "easy",
+    "sources": {
+      "artisjus": {
+        "iswc": "T-007.005.811-9",
+        "composer": "Kukovecz Gábor, Kalapács József"
+      },
+      "hungaroton": {
+        "catalog_type": "album",
+        "title": "Totális metál",
+        "year": 1986,
+        "label": "Start"
+      }
+    }
   }
 ]

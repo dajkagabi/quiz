@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:quiz/quiz/cubit/quiz_cubit.dart';
 import 'package:quiz/quiz/cubit/quiz_state.dart';
 import 'package:quiz/quiz/view/result_view.dart';
 import 'package:quiz/quiz/repository/quiz_repository.dart';
 
 // A QuizPage a quiz alkalmazás fő oldala,
-//  ahol a kérdések megjelennek és a felhasználó válaszolhat rájuk.
+// ahol a kérdések megjelennek és a felhasználó válaszolhat rájuk.
 // A QuizCubit-et használja az állapot kezelésére,
 // és a QuizRepository-t a kérdések betöltésére.
-// A kérdések megjelenítése és a válaszok értékelése is itt történik.
-// Amikor a kvíz véget ér, egy eredmény nézet jelenik meg a pontszámmal és egy újraindítás gombbal.
 class QuizPage extends StatelessWidget {
   const QuizPage({super.key});
 
@@ -26,8 +25,7 @@ class QuizPage extends StatelessWidget {
 class _QuizView extends StatelessWidget {
   const _QuizView();
 
-  /// Színpaletta a kvízhez: sötét háttér, kontrasztos kártyák és élénk színek
-  /// Visszatalálni ide változtatáshoz.
+  /// Színpaletta
   static const Color _bgColor = Color(0xFF101217);
   static const Color _cardColor = Color(0xFF1F2332);
   static const Color _accentColor = Color(0xFFFFC107);
@@ -55,16 +53,34 @@ class _QuizView extends StatelessWidget {
             );
           }
 
+          // Kezdőlap
           if (state.isWelcomePage) {
-            return _buildWelcomeScreen(context, state.questions.length);
+            return _buildWelcomeScreen(context);
           }
 
+          //  Nehézség választó képernyő
+          if (state.isDifficultyPage) {
+            return _buildDifficultyScreen(context);
+          }
+
+          //  Eredmény
           if (state.isFinished) {
             return ResultView(score: state.score);
           }
 
+          // Biztonsági ellenőrzés, ha a szűrt lista üres lenne
+          if (state.questions.isEmpty) {
+            return const Center(
+              child: Text(
+                'Nincs elérhető kérdés ezen a szinten.',
+                style: TextStyle(color: _contentText, fontSize: 16),
+              ),
+            );
+          }
+
           final question = state.questions[state.currentQuestionIndex];
 
+          //  A kvíz játék felülete
           return SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
             child: Column(
@@ -299,7 +315,7 @@ class _QuizView extends StatelessWidget {
                   ),
                 ],
 
-                // Manuális "Következő kérdés" gomb
+                // Következő kérdés gomb
                 if (state.isAnswered) ...[
                   const SizedBox(height: 24),
                   ElevatedButton.icon(
@@ -315,10 +331,7 @@ class _QuizView extends StatelessWidget {
                     onPressed: () {
                       context.read<QuizCubit>().goNextAfterDelay();
                     },
-                    icon: const Icon(
-                      Icons.arrow_forward,
-                      // fontWeight not valid for Icon; using default.
-                    ),
+                    icon: const Icon(Icons.arrow_forward),
                     label: Text(
                       state.currentQuestionIndex + 1 >= state.questions.length
                           ? 'Eredmények megtekintése'
@@ -338,8 +351,8 @@ class _QuizView extends StatelessWidget {
     );
   }
 
-  // 🔥 KIMAGASLÓAN SZEBB ÉS MODERNEBB KEZDŐLAP (WELCOME SCREEN)
-  Widget _buildWelcomeScreen(BuildContext context, int questionCount) {
+  //Kezdőképernyő
+  Widget _buildWelcomeScreen(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
@@ -348,7 +361,6 @@ class _QuizView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Spacer(),
-          // Nagyméretű dizájnos Rock ikon kör alakú háttérrel és parázs/arany effektussal
           Container(
             padding: const EdgeInsets.all(28),
             decoration: BoxDecoration(
@@ -360,14 +372,12 @@ class _QuizView extends StatelessWidget {
               ),
             ),
             child: const Icon(
-              Icons.bolt, // Villám / Rock ikon
+              Icons.bolt,
               size: 80,
               color: _accentColor,
             ),
           ),
           const SizedBox(height: 40),
-
-          // Főcím stílusos betűközzel és vastagsággal
           const Text(
             'Magyar Rock Kvíz',
             style: TextStyle(
@@ -379,8 +389,6 @@ class _QuizView extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
-
-          // Alcím / Leírás
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
@@ -393,36 +401,7 @@ class _QuizView extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 32),
-
-          // Kis modern "Badge" a kérdések számának kiemelésére
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: const Color(0xFF1E1E24),
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(color: Colors.white10),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.help_outline, color: _accentColor, size: 18),
-                const SizedBox(width: 8),
-                Text(
-                  '$questionCount kérdés vár rád',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
           const Spacer(),
-
-          // Prémium kinézetű indítógomb
           Container(
             width: double.infinity,
             height: 60,
@@ -446,7 +425,8 @@ class _QuizView extends StatelessWidget {
                 elevation: 0,
               ),
               onPressed: () {
-                context.read<QuizCubit>().startQuiz();
+                // Nehézség választóra ugrik
+                context.read<QuizCubit>().goToDifficultySelection();
               },
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -467,6 +447,104 @@ class _QuizView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
         ],
+      ),
+    );
+  }
+
+  //  Nehézség választó képernyő
+  Widget _buildDifficultyScreen(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Text(
+            'Válassz nehézségi szintet!',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              letterSpacing: 0.5,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Készülj fel, az extrém szint igazi mélyvíz!',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey.shade400,
+            ),
+          ),
+          const SizedBox(height: 40),
+          _buildDifficultyButton(
+            context,
+            label: 'Könnyű Rocker',
+            difficultyKey: 'easy',
+            color: Colors.green.shade600,
+            icon: Icons.sentiment_satisfied_alt,
+          ),
+          const SizedBox(height: 16),
+          _buildDifficultyButton(
+            context,
+            label: 'Haladó Gitáros',
+            difficultyKey: 'medium',
+            color: Colors.orange.shade600,
+            icon: Icons.music_note,
+          ),
+          const SizedBox(height: 16),
+          _buildDifficultyButton(
+            context,
+            label: 'EXTRÉM Rocklegenda ',
+            difficultyKey: 'extreme',
+            color: Colors.red.shade700,
+            icon: Icons.bolt,
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Segéd-widget a nehézség gombok egységes és látványos megjelenítéséhez
+  Widget _buildDifficultyButton(
+    BuildContext context, {
+    required String label,
+    required String difficultyKey,
+    required Color color,
+    required IconData icon,
+  }) {
+    return Container(
+      height: 65,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: color.withOpacity(0.15),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: _cardColor,
+          foregroundColor: Colors.white,
+          side: BorderSide(color: color.withOpacity(0.5), width: 1.5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          elevation: 0,
+        ),
+        onPressed: () {
+          context.read<QuizCubit>().selectDifficultyAndStart(difficultyKey);
+        },
+        icon: Icon(icon, color: color, size: 26),
+        label: Text(
+          label,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

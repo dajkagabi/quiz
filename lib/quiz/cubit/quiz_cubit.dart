@@ -1,30 +1,51 @@
 import 'package:bloc/bloc.dart';
 import 'package:quiz/quiz/cubit/quiz_state.dart';
+import 'package:quiz/quiz/models/question.dart';
 import 'package:quiz/quiz/repository/quiz_repository.dart';
 
 // Cubit a quiz állapotának kezelésére
 class QuizCubit extends Cubit<QuizState> {
   final QuizRepository _repository;
+  List<Question> _allRawQuestions = []; // Eredeti lista tárolása
 
   QuizCubit(QuizRepository repository)
     : _repository = repository,
       super(QuizState.initial());
 
   Future<void> loadQuiz() async {
-    final rawQuestions = await _repository.loadQuestions();
-    final shuffledQuestions = List.of(rawQuestions)..shuffle();
-
+    _allRawQuestions = await _repository.loadQuestions();
     emit(
       state.copyWith(
-        questions: shuffledQuestions,
         isLoading: false,
       ),
     );
   }
 
-  // Kezdőképernyő,
-  void startQuiz() {
-    emit(state.copyWith(isWelcomePage: false));
+  // A kezdőlapról a nehézség választóra lépünk
+  void goToDifficultySelection() {
+    emit(
+      state.copyWith(
+        isWelcomePage: false,
+        isDifficultyPage: true,
+      ),
+    );
+  }
+
+  // Kiválasztjuk a nehézséget, kiszűrjük a listát, megkeverjük és indítunk
+  void selectDifficultyAndStart(String difficulty) {
+    final filteredQuestions = _allRawQuestions
+        .where((q) => q.difficulty.toLowerCase() == difficulty.toLowerCase())
+        .toList();
+
+    final shuffledQuestions = List.of(filteredQuestions)..shuffle();
+
+    emit(
+      state.copyWith(
+        questions: shuffledQuestions,
+        selectedDifficulty: difficulty,
+        isDifficultyPage: false,
+      ),
+    );
   }
 
   void answer(bool isCorrect, int selectedOptionIndex) {
@@ -38,8 +59,6 @@ class QuizCubit extends Cubit<QuizState> {
     );
   }
 
-  // Vár egy rövid időt, majd megmutatja, hogy a válasz helyes volt-e.
-  // Ez létrehoz egy késleltetés  a felhasználói élményhez.
   Future<void> revealAnswerWithDelay(
     bool isCorrect,
     int selectedOptionIndex, {
@@ -49,7 +68,6 @@ class QuizCubit extends Cubit<QuizState> {
     answer(isCorrect, selectedOptionIndex);
   }
 
-  // Vár egy rövid időt, majd megmutatja a következő kérdést, vagy ha már nincs több kérdés, akkor véget ér a játék.
   Future<void> goNextAfterDelay() async {
     await Future<void>.delayed(const Duration(seconds: 1));
     final nextIndex = state.currentQuestionIndex + 1;
@@ -70,7 +88,6 @@ class QuizCubit extends Cubit<QuizState> {
   }
 
   void restart() {
-    // Újraindításkor visszajövünk a kezdőlapra, hogy újra lehessen indítani
     emit(QuizState.initial().copyWith(isLoading: true, isWelcomePage: true));
     loadQuiz();
   }

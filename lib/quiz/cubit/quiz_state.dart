@@ -14,6 +14,8 @@ class QuizState {
   final bool? wasCorrect;
   final int? selectedOptionIndex;
   final bool isWelcomePage;
+  final bool isDifficultyPage;
+  final String? selectedDifficulty;
 
   const QuizState({
     required this.questions,
@@ -25,6 +27,8 @@ class QuizState {
     required this.wasCorrect,
     required this.selectedOptionIndex,
     required this.isWelcomePage,
+    required this.isDifficultyPage,
+    this.selectedDifficulty,
   });
 
   factory QuizState.initial() {
@@ -38,6 +42,8 @@ class QuizState {
       wasCorrect: null,
       selectedOptionIndex: null,
       isWelcomePage: true,
+      isDifficultyPage: false,
+      selectedDifficulty: null,
     );
   }
 
@@ -51,6 +57,8 @@ class QuizState {
     bool? wasCorrect,
     int? selectedOptionIndex,
     bool? isWelcomePage,
+    bool? isDifficultyPage,
+    String? selectedDifficulty,
   }) {
     return QuizState(
       questions: questions ?? this.questions,
@@ -62,6 +70,8 @@ class QuizState {
       wasCorrect: wasCorrect ?? this.wasCorrect,
       selectedOptionIndex: selectedOptionIndex ?? this.selectedOptionIndex,
       isWelcomePage: isWelcomePage ?? this.isWelcomePage,
+      isDifficultyPage: isDifficultyPage ?? this.isDifficultyPage,
+      selectedDifficulty: selectedDifficulty ?? this.selectedDifficulty,
     );
   }
 }
