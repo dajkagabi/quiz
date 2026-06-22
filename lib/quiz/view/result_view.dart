@@ -39,7 +39,7 @@ class ResultView extends StatelessWidget {
     if (percentage >= 90) {
       rankTitle = 'Rocklegenda! ';
       rankDescription =
-          'Zseniális! Balázs Fecó, Presser Gábor és Cipő is büszke lenne rád. Mindent tudsz a magyar rockról!';
+          'Zseniális! Balázs Fecó, Presser Gábor és Tunyogi Péter is büszke lenne rád. Mindent tudsz a magyar rockról!';
       rankIcon = Icons.bolt;
       rankColor = Colors.amber.shade800;
     } else if (percentage >= 65) {
