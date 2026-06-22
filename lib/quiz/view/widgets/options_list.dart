@@ -80,8 +80,8 @@ class OptionsList extends StatelessWidget {
 
                 onTap: isAnswered
                     ? null
-                    : () {
-                        context.read<QuizCubit>().revealAnswerWithDelay(
+                    : () async {
+                        await context.read<QuizCubit>().revealAnswerWithDelay(
                           optionIndex == question.correctIndex,
 
                           optionIndex,

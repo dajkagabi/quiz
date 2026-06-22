@@ -87,8 +87,8 @@ class QuizCubit extends Cubit<QuizState> {
     );
   }
 
-  void restart() {
+  Future<void> restart() async {
     emit(QuizState.initial().copyWith(isLoading: true, isWelcomePage: true));
-    loadQuiz();
+    await loadQuiz();
   }
 }

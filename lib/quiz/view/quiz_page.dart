@@ -53,15 +53,15 @@ class _QuizView extends StatelessWidget {
               child: CircularProgressIndicator(color: _accentColor),
             );
           }
-          //
+          // Ha a kvíz befejeződött, jelenítse meg az eredményeket
           if (state.isFinished) {
             return ResultView(score: state.score);
           }
-          //
+          // Ha a nehézségi szint kiválasztása, jelenítse meg a nehézségi képernyőt
           if (state.isDifficultyPage) {
             return _buildDifficultyScreen(context);
           }
-          //
+          // Ha a kvíz kezdőlapja, jelenítse meg a kezdőképernyőt
           if (state.isWelcomePage) {
             return WelcomeScreen(
               onStart: () {

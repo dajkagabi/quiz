@@ -1,492 +1,602 @@
 [
   {
     "id": "q1",
-    "question": "Melyik évben alakult az Omega?",
-    "options": [
-      "1958",
-      "1962",
-      "1968",
-      "1972"
-    ],
+    "question": "Melyik évben jelent meg az Omega együttes ikonikus 'Tízezer lépés' című albuma?",
+    "options": ["1967", "1969", "1971", "1973"],
     "correctIndex": 1,
-    "topic": "omega",
+    "topic": "Klasszikus Rock",
     "difficulty": "easy",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Trombitás Frédi és a rettenetes emberek",
-        "year": 1968,
-        "label": "Pepita"
+        "catalog_type": "recording_context",
+        "title": "Tízezer lépés",
+        "year": 1969,
+        "label": "Qualiton"
+      },
+      "artisjus": {
+        "iswc": "T-007.001.123-4",
+        "composer": "Presser Gábor - Adamis Anna"
       }
     }
   },
   {
     "id": "q2",
-    "question": "Honnan származik az EDDA Művek?",
-    "options": [
-      "Debrecen",
-      "Miskolc",
-      "Szeged",
-      "Győr"
-    ],
-    "correctIndex": 1,
-    "topic": "edda",
+    "question": "Ki volt az Edda Művek frontembere és énekese a zenekar megalakulásától kezdve?",
+    "options": ["Pataky Attila", "Slamovits István", "Zselencz László", "Gidófalvy Attila"],
+    "correctIndex": 0,
+    "topic": "Hard Rock",
     "difficulty": "easy",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
+        "catalog_type": "label_context",
         "title": "Edda Művek 1.",
         "year": 1980,
-        "label": "Start"
+        "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.002.555-1",
+        "composer": "Pataky Attila - Slamovits István"
       }
     }
   },
   {
     "id": "q3",
-    "question": "Melyik zenekarhoz köthető a 'Ha én rózsa volnék' című dal?",
-    "options": [
-      "Illés",
-      "Locomotiv GT",
-      "Omega",
-      "Neoton Família"
-    ],
+    "question": "Melyik dal vált a Locomotiv GT (LGT) egyik legnagyobb slágerévé az amerikai turnéjuk előtt?",
+    "options": ["Ringasd el magad", "Gyöngyhajú lány", "Micsoda nagyszerű dolog", "Ezüst nyár"],
     "correctIndex": 0,
-    "topic": "illes",
+    "topic": "Progresszív Rock",
     "difficulty": "easy",
     "sources": {
-      "artisjus": {
-        "iswc": "T-007.003.829-9",
-        "composer": "Bródy János"
-      },
       "hungaroton": {
         "catalog_type": "recording_context",
-        "primary_performer": "Koncz Zsuzsa (kísér az Illés)",
-        "title": "Jelbeszéd",
+        "title": "Bummm!",
         "year": 1973,
-        "label": "Pepita"
+        "label": "Pepita",
+        "primaryPerformer": "Locomotiv GT"
+      },
+      "artisjus": {
+        "iswc": "T-007.003.789-0",
+        "composer": "Presser Gábor - Adamis Anna"
       }
     }
   },
   {
     "id": "q4",
-    "question": "Melyik zenekar adta ki a 'Miénk itt a tér' című dalt?",
-    "options": [
-      "Locomotiv GT",
-      "Beatrice",
-      "P. Mobil",
-      "Skorpió"
-    ],
+    "question": "Melyik rock & roll stílusú formáció énekelte a 'Limbó hintó' című óriási slágert?",
+    "options": ["Hungária", "Dolly Roll", "Generál", "Illés"],
     "correctIndex": 0,
-    "topic": "lgt",
+    "topic": "Rock and Roll",
     "difficulty": "easy",
     "sources": {
-      "artisjus": {
-        "iswc": "T-007.004.832-8",
-        "composer": "Presser Gábor, Adamis Anna"
-      },
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Bummm!",
-        "year": 1973,
+        "catalog_type": "recording_context",
+        "title": "Rock n' Roll Party",
+        "year": 1980,
         "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.004.111-2",
+        "composer": "Fenyő Miklós - Novai Gábor"
+      }
+    }
+  },
+  {
+    "id": "q5",
+    "question": "Ki volt a Piramis együttes rendkívül népszerű, karizmatikus énekese a '70-es évek végén?",
+    "options": ["Révész Sándor", "Gallai Péter", "Som Lajos", "Závodi János"],
+    "correctIndex": 0,
+    "topic": "Hard Rock",
+    "difficulty": "easy",
+    "sources": {
+      "hungaroton": {
+        "catalog_type": "label_context",
+        "title": "Piramis II.",
+        "year": 1978,
+        "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.005.222-3",
+        "composer": "Som Lajos - Horváth Attila"
       }
     }
   },
   {
     "id": "q6",
-    "question": "Milyen zenei stílushoz köthető a P. Mobil?",
-    "options": [
-      "Hard rock",
-      "Diszkó",
-      "Pop",
-      "Jazz"
-    ],
+    "question": "Melyik híres magyar rockoperát szerezte Szörényi Levente és Bródy János?",
+    "options": ["István, a király", "Kőműves Kelemen", "Atilla - Isten kardja", "Veled, Uram!"],
     "correctIndex": 0,
-    "topic": "p_mobil",
+    "topic": "Rockopera",
     "difficulty": "easy",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Mobilizmo",
-        "year": 1981,
+        "catalog_type": "recording_context",
+        "title": "István, a király",
+        "year": 1983,
         "label": "Start"
+      },
+      "artisjus": {
+        "iswc": "T-007.006.333-4",
+        "composer": "Szörényi Levente - Bródy János"
       }
     }
   },
   {
     "id": "q7",
-    "question": "Melyik zenekarhoz köthető a 'Gyere kislány' című dal?",
-    "options": [
-      "Karthago",
-      "Ossian",
-      "Neoton Família",
-      "Beatrice"
-    ],
-    "correctIndex": 3,
-    "topic": "beatrice",
+    "question": "Hogy hívták a Nagy Feró vezette, 'nemzet csótányaként' is emlegetett punk-rock zenekart?",
+    "options": ["Beatrice", "Bikini", "Ős-Bikini", "Rolls Frakció"],
+    "correctIndex": 0,
+    "topic": "Punk Rock",
     "difficulty": "easy",
     "sources": {
-      "artisjus": {
-        "iswc": "T-007.126.974-9",
-        "composer": "Nagy Feró"
-      },
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Gyermekkorunk lexikona",
+        "catalog_type": "label_context",
+        "title": "Beatrice",
         "year": 1988,
-        "label": "Hungaroton"
+        "label": "Ring"
+      },
+      "artisjus": {
+        "iswc": "T-007.007.444-5",
+        "composer": "Nagy Feró"
       }
     }
   },
   {
     "id": "q8",
-    "question": "Ki volt a Hobo Blues Band frontembere?",
-    "options": [
-      "Földes László (Hobo)",
-      "Pataky Attila",
-      "Paksi Endre",
-      "Bródy János"
-    ],
+    "question": "Melyik együttes énekelte a 'Közeli helyeken' és a 'Mielőtt elmegyek' című lírai rockslágereket?",
+    "options": ["Bikini", "Republic", "Korál", "V'Moto-Rock"],
     "correctIndex": 0,
-    "topic": "hobo_blues_band",
+    "topic": "Pop Rock",
     "difficulty": "easy",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Középeurópai Hobo Blues",
-        "year": 1980,
-        "label": "Pepita"
+        "catalog_type": "recording_context",
+        "title": "Közeli helyeken",
+        "year": 1989,
+        "label": "Profil"
+      },
+      "artisjus": {
+        "iswc": "T-007.008.555-6",
+        "composer": "Németh Alajos - Dévényi Ádám"
       }
     }
   },
   {
     "id": "q9",
-    "question": "Ki alapította az Ossian zenekart?",
-    "options": [
-      "Paksi Endre",
-      "Pataky Attila",
-      "Kóbor János",
-      "Benkő László"
-    ],
+    "question": "Melyik hard rock zenekar nevéhez fűződik a 'Kétforintos dal' és a 'Menj tovább'?",
+    "options": ["P. Mobil", "Mobilmánia", "Tunyogi Rock Band", "Pandora's Box"],
     "correctIndex": 0,
-    "topic": "ossian",
-    "difficulty": "medium",
+    "topic": "Hard Rock",
+    "difficulty": "easy",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Acélszív",
-        "year": 1988,
-        "label": "Start"
+        "catalog_type": "label_context",
+        "title": "Mobilizmo",
+        "year": 1981,
+        "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.009.666-7",
+        "composer": "Bencsik Sándor - Lóránt Schuster"
       }
     }
   },
   {
     "id": "q10",
-    "question": "Melyik zenekarhoz köthető a '67-es út' című dal?",
-    "options": [
-      "Republic",
-      "Omega",
-      "Illés",
-      "Locomotiv GT"
-    ],
+    "question": "Ki a frontembere és névadója a hazai blues-rockot meghatározó Hobo Blues Band-nek?",
+    "options": ["Földes László", "Deák Bill Gyula", "Póka Egon", "Tátrai Tibor"],
     "correctIndex": 0,
-    "topic": "republic",
+    "topic": "Blues Rock",
     "difficulty": "easy",
     "sources": {
-      "artisjus": {
-        "iswc": "T-007.128.534-1",
-        "composer": "Bódi László"
-      },
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Disco",
-        "year": 1993,
-        "label": "Quint"
+        "catalog_type": "recording_context",
+        "title": "Vadászat",
+        "year": 1984,
+        "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.010.777-8",
+        "composer": "Földes László - Póka Egon"
       }
     }
   },
   {
     "id": "q11",
-    "question": "Melyik tragikus ihletésű sláger köthető a Karthago zenekarhoz?",
-    "options": [
-      "Apáink útján",
-      "Requiem",
-      "Az ezredforduló",
-      "Keleti éj"
-    ],
-    "correctIndex": 1,
-    "topic": "karthago",
-    "difficulty": "easy",
+    "question": "Melyik albummal debütált 1986-ban a magyar heavy metal úttörője, a Pokolgép?",
+    "options": ["Totális metál", "Pokoli színjáték", "Éjszakai bevetés", "Metál az ész"],
+    "correctIndex": 0,
+    "topic": "Heavy Metal",
+    "difficulty": "medium",
     "sources": {
-      "artisjus": {
-        "iswc": "T-007.004.140-5",
-        "composer": "Szigeti Ferenc, Takáts Tamás"
-      },
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Karthago",
-        "year": 1981,
+        "catalog_type": "recording_context",
+        "title": "Totális metál",
+        "year": 1986,
         "label": "Start"
+      },
+      "artisjus": {
+        "iswc": "T-007.011.888-9",
+        "composer": "Kukovecz Gábor - Paksi Endre"
       }
     }
   },
   {
     "id": "q12",
-    "question": "Melyik kultikus daláról ismert leginkább a Piramis zenekar?",
-    "options": [
-      "Szállj fel magasra",
-      "A becsület",
-      "Kóbor angyal",
-      "Ajándék"
-    ],
-    "correctIndex": 1,
-    "topic": "piramis",
-    "difficulty": "easy",
+    "question": "Frenreisz Károly a Locomotiv GT-ből való távozása után melyik virtuóz hard rock triót alapította meg?",
+    "options": ["Skorpió", "Dinamit", "General", "Új Skorpió"],
+    "correctIndex": 0,
+    "topic": "Hard Rock",
+    "difficulty": "medium",
     "sources": {
-      "artisjus": {
-        "iswc": "T-007.006.185-0",
-        "composer": "Som Lajos, Köves Miklós, Horváth Attila"
-      },
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Piramis I.",
-        "year": 1977,
+        "catalog_type": "label_context",
+        "title": "A rohanás",
+        "year": 1974,
         "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.012.999-0",
+        "composer": "Frenreisz Károly"
       }
     }
   },
   {
     "id": "q13",
-    "question": "Ki alapította a Skorpió zenekart a Lokomotiv GT-ből való távozása után?",
-    "options": [
-      "Frenreisz Károly",
-      "Szűcs Antal Gábor",
-      "Papp Gyula",
-      "Fekete Gábor"
-    ],
+    "question": "Melyik gitároslegenda fémjelezte a 'A zöld, a bíbor és a fekete' dalt szerzőként a P. Box-ban?",
+    "options": ["Bencsik Sándor", "Cserháti István", "Sáfár József", "Varga Miklós"],
     "correctIndex": 0,
-    "topic": "skorpio",
+    "topic": "Hard Rock",
     "difficulty": "medium",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "A rohanás",
-        "year": 1974,
-        "label": "Pepita"
+        "catalog_type": "recording_context",
+        "title": "Kő kövön",
+        "year": 1983,
+        "label": "Start"
+      },
+      "artisjus": {
+        "iswc": "T-007.013.111-1",
+        "composer": "Bencsik Sándor - Cserháti István"
       }
     }
   },
   {
     "id": "q14",
-    "question": "Ki volt a Balázs Fecó által vezetett Korál együttes állandó szövegírója?",
-    "options": [
-      "Horváth Attila",
-      "Bródy János",
-      "Sztevanovity Dusán",
-      "Adamis Anna"
-    ],
+    "question": "Ki volt a legendás, tragikus sorsú énekese a Tunyogi Rock Band (TRB) formációnak?",
+    "options": ["Tunyogi Péter", "Zeffer András", "Kékesi János", "Fischer László"],
     "correctIndex": 0,
-    "topic": "koral",
+    "topic": "Hard Rock",
     "difficulty": "medium",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Korál I.",
-        "year": 1980,
-        "label": "Start"
+        "catalog_type": "label_context",
+        "title": "A tegnap készen van",
+        "year": 1997,
+        "label": "Hungaroton"
+      },
+      "artisjus": {
+        "iswc": "T-007.014.222-2",
+        "composer": "Tunyogi Péter - Zeffer András"
       }
     }
   },
   {
     "id": "q15",
-    "question": "Melyik dallal nyert a Neoton Família nagydíjat a japán Yamaha Fesztiválon?",
-    "options": [
-      "Santa Maria",
-      "Marathon",
-      "Don Quijote",
-      "Kétszázhúsz felett"
-    ],
-    "correctIndex": 1,
-    "topic": "neoton_familia",
+    "question": "Melyik együttes híresült el az öt elefántról szóló történetéről és a 'Requiem' című lírai daláról?",
+    "options": ["Karthago", "East", "V'Moto-Rock", "Satöbbi"],
+    "correctIndex": 0,
+    "topic": "Hard Rock",
     "difficulty": "medium",
     "sources": {
-      "artisjus": {
-        "iswc": "T-007.005.158-3",
-        "composer": "Pásztor László, Jakab György, Hatvani Emese"
-      },
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Marathon",
-        "year": 1980,
-        "label": "Pepita"
+        "catalog_type": "recording_context",
+        "title": "Karthago I.",
+        "year": 1981,
+        "label": "Start"
+      },
+      "artisjus": {
+        "iswc": "T-007.015.333-3",
+        "composer": "Szigeti Ferenc"
       }
     }
   },
   {
     "id": "q16",
-    "question": "Melyik album volt a Bikini zenekar első nagylemeze D. Nagy Lajos énekessel?",
-    "options": [
-      "Hova lett...",
-      "XX. századi híradó",
-      "Ezt nem tudom másképp mondani",
-      "Mondd el"
-    ],
-    "correctIndex": 2,
-    "topic": "bikini",
+    "question": "Ki volt az énekese és billentyűse a lírai dallamos rockot játszó Korál együttesnek?",
+    "options": ["Balázs Fecó", "Fischer László", "Scholcz Péter", "Dorozsmai Péter"],
+    "correctIndex": 0,
+    "topic": "Melodic Rock",
     "difficulty": "medium",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Ezt nem tudom másképp mondani",
-        "year": 1985,
-        "label": "Start"
+        "catalog_type": "label_context",
+        "title": "Korál I.",
+        "year": 1980,
+        "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.016.444-4",
+        "composer": "Balázs Fecó - Horváth Attila"
       }
     }
   },
   {
     "id": "q17",
-    "question": "Melyik sláger köthető a Demjén Ferenc vezette V'Moto-Rock zenekarhoz?",
-    "options": [
-      "Darabokra törted a szívem",
-      "Gyertyák",
-      "Jégszív",
-      "Sajtból van a Hold"
-    ],
-    "correctIndex": 2,
-    "topic": "vmoto_rock",
-    "difficulty": "easy",
+    "question": "Melyik progresszív rockzenekar készítette el a monumentális 'Játékok' című koncepcióalbumot?",
+    "options": ["East", "Solaris", "Color", "After Crying"],
+    "correctIndex": 0,
+    "topic": "Progresszív Rock",
+    "difficulty": "medium",
     "sources": {
-      "artisjus": {
-        "iswc": "T-007.003.541-6",
-        "composer": "Demjén Ferenc, Lerch István"
-      },
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "V'Moto-Rock II.",
-        "year": 1980,
-        "label": "Pepita"
+        "catalog_type": "recording_context",
+        "title": "Játékok",
+        "year": 1981,
+        "label": "Start"
+      },
+      "artisjus": {
+        "iswc": "T-007.017.555-5",
+        "composer": "Móczán Péter - Király István"
       }
     }
   },
   {
     "id": "q18",
-    "question": "Melyik progresszív rockzenekarhoz köthető az 1972-es 'Magányos utazás' című ritka kislemez?",
-    "options": [
-      "Syrius",
-      "V73",
-      "Tejút",
-      "Mini"
-    ],
+    "question": "Demjén Ferenc 'Rózsi' melyik nagysikerű supergroup énekese és basszusgitárosa volt a '70-es években?",
+    "options": ["V'Moto-Rock", "Bergendy", "Generál", "Korong"],
     "correctIndex": 0,
-    "topic": "syrius",
-    "difficulty": "extreme",
+    "topic": "Pop Rock",
+    "difficulty": "medium",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Devil's Masquerade",
-        "year": 1972,
+        "catalog_type": "label_context",
+        "title": "V'Moto-Rock I.",
+        "year": 1978,
         "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.018.666-6",
+        "composer": "Demjén Ferenc - Lerch István"
       }
     }
   },
   {
     "id": "q19",
-    "question": "Melyik blues-rock formáció készített közös albumot Deák Bill Gyulával 'Rossz vér' címmel?",
-    "options": [
-      "Török Ádám és a Mini",
-      "Bill és a Box Company",
-      "P. Box",
-      "Kormorán"
-    ],
-    "correctIndex": 1,
-    "topic": "bill_box_company",
-    "difficulty": "extreme",
+    "question": "Melyik debreceni progresszív/szimfonikus rockzenekar adta ki az 'Új kor' című nagylemezt?",
+    "options": ["Color", "Panta Rhei", "Gépfolyam", "Lux"],
+    "correctIndex": 0,
+    "topic": "Szimfonikus Rock",
+    "difficulty": "medium",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Rossz vér",
-        "year": 1983,
-        "label": "Start"
+        "catalog_type": "recording_context",
+        "title": "Új kor",
+        "year": 1982,
+        "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.019.777-7",
+        "composer": "Bokor Attila - Bokor Gyula"
       }
     }
   },
   {
     "id": "q20",
-    "question": "Ki volt az Omen zenekar énekese az 1997-es 'Idegen anyag' című nagylemezen?",
-    "options": [
-      "Kalapács József",
-      "Koroknai Árpád",
-      "Rudán Joe",
-      "Molnár 'Stula' Péter"
-    ],
-    "correctIndex": 0,
-    "topic": "omen",
+    "question": "Ki volt a legendás gitárosa a zseniális hard-rock formációnak, a Lord együttesnek?",
+    "options": ["Vida Ferenc", "Pohl Mihály", "Erős Attila", "Gidófalvy Attila"],
+    "correctIndex": 2,
+    "topic": "Hard Rock",
     "difficulty": "medium",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Idegen anyag",
-        "year": 1997,
-        "label": "Hungaroton"
+        "catalog_type": "label_context",
+        "title": "Szemedben a csillagok",
+        "year": 1988,
+        "label": "Profil"
+      },
+      "artisjus": {
+        "iswc": "T-007.020.888-8",
+        "composer": "Erős Attila - Pohl Mihály"
       }
     }
   },
   {
     "id": "q21",
-    "question": "Melyik világhírű klasszikus zenei mű rock-átiratáról volt rendkívül ismert az Emerson, Lake & Palmer stílusát követő V'73 zenekar?",
-    "options": [
-      "Vivaldi: A négy évszak",
-      "Csajkovszkij: Diótörő",
-      "Muszorgszkij: Egy kiállítás képei",
-      "Beethoven: IX. szimfónia"
-    ],
-    "correctIndex": 2,
-    "topic": "v73",
+    "question": "Melyik sci-fi tematikájú instrumentális progresszív rock remekművet adta ki a Solaris 1984-ben?",
+    "options": ["Marsbéli krónikák", "1984", "Ezerkilencszáznyolcvannégy", " Nostradamus"],
+    "correctIndex": 0,
+    "topic": "Progresszív Rock",
     "difficulty": "extreme",
     "sources": {
-      "artisjus": null,
       "hungaroton": {
         "catalog_type": "recording_context",
-        "primary_performer": "V'73 (Forrás: Magyar Narancs / Beatkorszak)",
-        "title": "Egy kiállítás képei (Muszorgszkij-feldolgozás, 1976)",
-        "year": 1976,
-        "label": "Magyar Rádió / Élő felvétel"
+        "title": "Marsbéli krónikák",
+        "year": 1984,
+        "label": "Start"
+      },
+      "artisjus": {
+        "iswc": "T-007.021.999-9",
+        "composer": "Erdész Róbert - Bogdán Csaba"
       }
     }
   },
   {
     "id": "q22",
-    "question": "Melyik heavy metal zenekar debütált a korszakalkotó 'Totális metál' albummal 1986-ban?",
-    "options": [
-      "Ossian",
-      "Pokolgép",
-      "Moby Dick",
-      "Akela"
-    ],
+    "question": "Melyik miskolci heavy metal csapat adta ki az 'A vasgárda' című kultikus underground kislemezt?",
+    "options": ["Sámán", "Missio", "Akela", "Omen"],
     "correctIndex": 1,
-    "topic": "pokolgep",
-    "difficulty": "easy",
+    "topic": "Heavy Metal",
+    "difficulty": "extreme",
     "sources": {
-      "artisjus": {
-        "iswc": "T-007.005.811-9",
-        "composer": "Kukovecz Gábor, Kalapács József"
-      },
       "hungaroton": {
-        "catalog_type": "album",
-        "title": "Totális metál",
-        "year": 1986,
-        "label": "Start"
+        "catalog_type": "label_context",
+        "title": "A vasgárda (Single)",
+        "year": 1989,
+        "label": "Hungaroton"
+      },
+      "artisjus": {
+        "iswc": "T-007.022.111-2",
+        "composer": "Nagyfi László - Rudán Joe"
+      }
+    }
+  },
+  {
+    "id": "q23",
+    "question": "Ki volt a legendás underground/art-rock formáció, a KFT együttes eredeti dobosa?",
+    "options": ["Márton András", "Bornai Tibor", "Laár András", "II. Lengyelfi Miklós"],
+    "correctIndex": 0,
+    "topic": "New Wave",
+    "difficulty": "extreme",
+    "sources": {
+      "hungaroton": {
+        "catalog_type": "recording_context",
+        "title": "Macska az úton",
+        "year": 1982,
+        "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.023.222-3",
+        "composer": "Bornai Tibor - Laár András"
+      }
+    }
+  },
+  {
+    "id": "q24",
+    "question": "Melyik progresszív fúziós rockbanda kísérte el a Mini együttest, soraiban Török Ádámmal?",
+    "options": ["Mini", "Syrius", "Kex", "Rákfogó"],
+    "correctIndex": 0,
+    "topic": "Progresszív Jazz-Rock",
+    "difficulty": "extreme",
+    "sources": {
+      "hungaroton": {
+        "catalog_type": "label_context",
+        "title": "Vissza a városba",
+        "year": 1978,
+        "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.024.333-4",
+        "composer": "Török Ádám"
+      }
+    }
+  },
+  {
+    "id": "q25",
+    "question": "Melyik külföldön is komoly sikereket elért kultikus jazz-rock supergroup adta ki Az 'Devil's Masquerade' lemezt?",
+    "options": ["Syrius", "Saturnus", "Apostol", "Skorpió"],
+    "correctIndex": 0,
+    "topic": "Jazz Rock",
+    "difficulty": "extreme",
+    "sources": {
+      "hungaroton": {
+        "catalog_type": "recording_context",
+        "title": "Devil's Masquerade",
+        "year": 1972,
+        "label": "Qualiton"
+      },
+      "artisjus": {
+        "iswc": "T-007.025.444-5",
+        "composer": "Baronits Zsolt - Orszáczky Miklós"
+      }
+    }
+  },
+  {
+    "id": "q26",
+    "question": "Melyik underground glam/hard rock formáció frontembere volt Takáts Tamás, mielőtt a Karthagóba igazolt?",
+    "options": ["Forma-1", "Kormorán", "Gépfolyam", "Sensation"],
+    "correctIndex": 0,
+    "topic": "Hard Rock",
+    "difficulty": "extreme",
+    "sources": {
+      "hungaroton": {
+        "catalog_type": "label_context",
+        "title": "Forma-1 ritkaságok",
+        "year": 1979,
+        "label": "MHV"
+      },
+      "artisjus": {
+        "iswc": "T-007.026.555-6",
+        "composer": "Takáts Tamás"
+      }
+    }
+  },
+  {
+    "id": "q27",
+    "question": "Melyik avantgárd rock és progresszív kamarazenei együttes készítette el a 'Manticore' című szvitet?",
+    "options": ["After Crying", "Solaris", "East", "Kolinda"],
+    "correctIndex": 0,
+    "topic": "Avantgárd Rock",
+    "difficulty": "extreme",
+    "sources": {
+      "hungaroton": {
+        "catalog_type": "recording_context",
+        "title": "Overground Music",
+        "year": 1990,
+        "label": "Hungaroton"
+      },
+      "artisjus": {
+        "iswc": "T-007.027.666-7",
+        "composer": "Pejtsik Péter - Vedres Csaba"
+      }
+    }
+  },
+  {
+    "id": "q28",
+    "question": "Melyik kultikus thrash metal formáció készítette el az 'A fenevad' című brutális albumot?",
+    "options": ["Akela", "Moby Dick", "Remorse", "Beyond"],
+    "correctIndex": 0,
+    "topic": "Thrash Metal",
+    "difficulty": "extreme",
+    "sources": {
+      "hungaroton": {
+        "catalog_type": "label_context",
+        "title": "A fenevad",
+        "year": 1993,
+        "label": "Hungaroton"
+      },
+      "artisjus": {
+        "iswc": "T-007.028.777-8",
+        "composer": "Katona László"
+      }
+    }
+  },
+  {
+    "id": "q29",
+    "question": "Melyik zseniális heavy metal formációt alapította a Pokolgépből távozó Kalapács József és Nagyfi László?",
+    "options": ["Omen", "Ossian", "Wellington", "Sámán"],
+    "correctIndex": 0,
+    "topic": "Heavy Metal",
+    "difficulty": "extreme",
+    "sources": {
+      "hungaroton": {
+        "catalog_type": "recording_context",
+        "title": "Feketében",
+        "year": 1991,
+        "label": "Hungaroton"
+      },
+      "artisjus": {
+        "iswc": "T-007.029.888-9",
+        "composer": "Nagyfi László - Kalapács József"
+      }
+    }
+  },
+  {
+    "id": "q30",
+    "question": "Ki volt a legendás gitárosa és zeneszerzője a progresszív rockot elektronikus elemekkel vegyítő Panta Rhei együttesnek?",
+    "options": ["Szalay András", "Szalay Sándor", "Matolcsy Kálmán", "Budai Tamás"],
+    "correctIndex": 1,
+    "topic": "Progresszív Rock",
+    "difficulty": "extreme",
+    "sources": {
+      "hungaroton": {
+        "catalog_type": "recording_context",
+        "title": "Panta Rhei",
+        "year": 1981,
+        "label": "Pepita"
+      },
+      "artisjus": {
+        "iswc": "T-007.030.999-0",
+        "composer": "Szalay Sándor - Szalay András"
       }
     }
   }

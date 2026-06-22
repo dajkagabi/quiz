@@ -62,6 +62,7 @@ class SourceCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 6),
+                // Hivatalos kiadás, év, kiadó
                 Text(
                   question.sources!.hungaroton!.catalogType ==
                           'recording_context'

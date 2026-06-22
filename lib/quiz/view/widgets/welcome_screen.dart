@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  final VoidCallback onStart;
-
   // Kezdőlap
   const WelcomeScreen({
-    super.key,
     required this.onStart,
+    super.key,
   });
+  final VoidCallback onStart;
 
   @override
   Widget build(BuildContext context) {
